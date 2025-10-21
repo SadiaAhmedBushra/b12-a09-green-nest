@@ -1,0 +1,74 @@
+[
+  {
+    "plantId": 1,
+    "plantName": "Snake Plant",
+    "category": "Air Purifier",
+    "price": 18,
+    "rating": 4.8,
+    "availableStock": 12,
+    "careLevel": "Easy",
+    "description": "A hardy plant that purifies indoor air and thrives in low light. Perfect for bedrooms and offices.",
+    "image": "https://i.ibb.co.com/qMdFT0pJ/Snake-Plant.webp",
+    "providerName": "UrbanGreen Studio"
+  },
+  {
+    "plantId": 2,
+    "plantName": "Peace Lily",
+    "category": "Flowering Plant",
+    "price": 22,
+    "rating": 4.7,
+    "availableStock": 8,
+    "careLevel": "Medium",
+    "description": "Elegant white blooms and glossy leaves that brighten any indoor space while filtering toxins.",
+    "image": "https://i.ibb.co.com/VctypDQh/DSC00503.webp",
+    "providerName": "GreenNest Hub"
+  },
+  {
+    "plantId": 3,
+    "plantName": "Areca Palm",
+    "category": "Tropical",
+    "price": 30,
+    "rating": 4.6,
+    "availableStock": 6,
+    "careLevel": "Medium",
+    "description": "A lush indoor palm that adds a tropical vibe and helps humidify dry air naturally.",
+    "image": "https://i.ibb.co.com/sJNqBKDj/areca-palm-palmera-849528-1200x1200.webp",
+    "providerName": "Leaf & Light"
+  },
+  {
+    "plantId": 4,
+    "plantName": "ZZ Plant",
+    "category": "Low Light",
+    "price": 25,
+    "rating": 4.9,
+    "availableStock": 15,
+    "careLevel": "Easy",
+    "description": "A nearly indestructible plant with glossy green leaves. Thrives even with minimal care.",
+    "image": "https://i.ibb.co.com/cXptP000/1-af764eda-b091-4320-953d-e4de57387c54.webp",
+    "providerName": "Nature Nook"
+  },
+  {
+    "plantId": 5,
+    "plantName": "Spider Plant",
+    "category": "Air Purifier",
+    "price": 16,
+    "rating": 4.5,
+    "availableStock": 20,
+    "careLevel": "Easy",
+    "description": "A fast-growing plant that helps remove indoor pollutants and grows beautiful hanging offshoots.",
+    "image": "https://i.ibb.co.com/vvTmcJS5/Beards-Daises-27-9-220111copy.webp",
+    "providerName": "FreshLeaf Corner"
+  },
+  {
+    "plantId": 6,
+    "plantName": "Fiddle Leaf Fig",
+    "category": "Decorative",
+    "price": 45,
+    "rating": 4.4,
+    "availableStock": 5,
+    "careLevel": "Hard",
+    "description": "A stunning statement plant with large violin-shaped leaves that thrive in bright, indirect light.",
+    "image": "https://i.ibb.co.com/Sj6jNPd/Fiddle-Leaf-Fig-Main2.webp",
+    "providerName": "BloomSpace BD"
+  }
+]

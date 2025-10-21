@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #4CBB17;
+  --color-secondary: #32CD32;
+  --color-base-200: #ECFFDC;
+  --color-base-300: #228B22;
+  --color-accent: #93C572;
+
+}
+
+*{
+  font-family: "Gentium Book Plus", serif;
+}
