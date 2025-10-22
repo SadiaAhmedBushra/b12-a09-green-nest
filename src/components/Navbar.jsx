@@ -1,15 +1,22 @@
-import React, { use , useContext } from "react";
+import React, { use, useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { FaUserAlt } from "react-icons/fa";
 import { AuthContext } from "../provider/AuthProvider";
 import { MdLogout } from "react-icons/md";
 
 const Navbar = () => {
-const { user } = use(AuthContext);
+  const { user, logOut } = use(AuthContext);
 
-const handleLogOut = () =>{
-  alert("logging out");
-}
+  const handleLogOut = () => {
+    
+    logOut()
+      .then(() => {
+        alert("logged out successfully");
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  };
   return (
     <div>
       <div className="flex justify-between items-center mt-5">
@@ -24,12 +31,15 @@ const handleLogOut = () =>{
         </div>
 
         <div className="login-btn flex gap-2">
-          
-          {
-            user ? <button onClick={handleLogOut} className="btn btn-primary p-3"><MdLogout size={20} /> Log Out</button> : <Link to="/auth/login" className="btn btn-primary p-3">
-            <FaUserAlt /> Log In
-          </Link>
-          }
+          {user ? (
+            <button onClick={handleLogOut} className="btn btn-primary p-3">
+              <MdLogout size={20} /> Log Out
+            </button>
+          ) : (
+            <Link to="/auth/login" className="btn btn-primary p-3">
+              <FaUserAlt /> Log In
+            </Link>
+          )}
         </div>
       </div>
       <div>{user && user.email}</div>
