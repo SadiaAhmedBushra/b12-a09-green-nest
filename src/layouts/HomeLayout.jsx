@@ -21,7 +21,7 @@ const HomeLayout = () => {
           </div>
 
           <div className="col-span-12 lg:col-span-3 flex justify-end">
-            <SocialLogIn />
+            {/* <SocialLogIn /> */}
           </div>
         </div>
 

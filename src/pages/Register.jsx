@@ -1,29 +1,65 @@
-import React, { use } from "react";
-import { Link, useActionData } from "react-router";
+import React, { use, useState, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
+import SocialLogIn from "../components/SocialLogIn";
 
 const Register = () => {
-  const { createUser, setUser } = use(AuthContext);
+  const [nameError, setNameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [error, setError] = useState("");
+  const { createUser, setUser, googleSignIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        navigate(location.state ? location.state : "/");
+      })
+      .catch((error) => {
+        setError(error.code);
+      });
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const form = e.target;
     const name = form.name.value;
+    if (name.length < 5) {
+      setNameError("Name must be more than 5 characters.");
+      return;
+    } else {
+      setNameError("");
+    }
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, email, password);
+
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters long.");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setPasswordError("Password must contain at least one uppercase letter.");
+      return;
+    } else if (!/[a-z]/.test(password)) {
+      setPasswordError("Password must contain at least one lowercase letter.");
+      return;
+    } else {
+      setPasswordError("");
+    }
 
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        setUser(user)
-        // console.log(user);
+        setUser(user);
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage);
+        // const errorMessage = error.message;
+        // alert(errorMessage);
+        setError(errorCode);
       });
   };
   return (
@@ -44,6 +80,18 @@ const Register = () => {
                   placeholder="Name"
                   required
                 />
+                {nameError && (
+                  <p className=" text-xs text-error">{nameError}</p>
+                )}
+                <label className="label">Photo-URL</label>
+                <input
+                  name="url"
+                  type="url"
+                  className="input"
+                  placeholder="Photo-URL"
+                  required
+                />
+
                 <label className="label">Email</label>
                 <input
                   name="email"
@@ -60,7 +108,10 @@ const Register = () => {
                   placeholder="Password"
                   required
                 />
-
+                {passwordError && (
+                  <p className="text-xs text-error">{passwordError}</p>
+                )}
+                {error && <p className="text-xs text-error">{error}</p>}
                 <button type="submit" className="btn btn-primary mt-4">
                   Register
                 </button>
@@ -73,6 +124,9 @@ const Register = () => {
               </fieldset>
             </form>
           </div>
+        </div>
+        <div className="text-center mt-5">
+<SocialLogIn handleGoogleSignIn={handleGoogleSignIn} />
         </div>
       </div>
     </div>

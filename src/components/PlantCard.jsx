@@ -22,7 +22,7 @@ const PlantCard = ({ plant }) => {
       {/* Spacer to push button to bottom */}
       <div className="mt-auto">
         <Link
-          to={`/plant/${plant.plantId}`}
+          to={`/plantdetails/${plant.plantId}`}
           className="btn btn-primary block text-white text-center px-4 py-2 rounded hover:bg-base-200 hover:text-black font-semibold transition"
         >
           View Details

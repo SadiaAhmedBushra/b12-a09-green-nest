@@ -7,6 +7,8 @@ import MeetOurGreenExperts from "../pages/MeetOurGreenExperts";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AuthLayout from "../layouts/AuthLayout";
+import PlantDetails from "../pages/PlantDetails";
+import PrivateRoute from "../provider/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -48,8 +50,11 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: "/plants",
-    element: <h2>Plants</h2>,
+    path: "/plantdetails/:plantId",
+    element: <PrivateRoute> 
+      <PlantDetails></PlantDetails>
+    </PrivateRoute>,
+    loader: ()=> fetch("/plants.json"),
   },
   {
     path: "/profile",
