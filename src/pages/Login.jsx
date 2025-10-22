@@ -4,12 +4,12 @@ import { Link } from "react-router";
 const Login = () => {
   return (
     <div>
-      <div className="bg-base-200 my-15 rounded p-15">
-        <div className="flex flex-col justify-items-center mx-auto gap-4">
-          <div className="text-center mb-5">
-            <h1 className="text-5xl font-bold">Login now!</h1>
+      <div className="w-11/12 mx-auto my-10">
+        <div className="flex flex-col justify-items-center mx-auto gap-4 ">
+          <div className="text-center mb-5 ">
+            <h1 className="text-3xl font-bold">Login now!</h1>
           </div>
-          <div className="mx-auto bg-base-100 w-full max-w-sm shadow-2xl">
+          <div className="mx-auto w-full max-w-sm shadow-2xl bg-base-200 rounded">
             <div className="card-body">
               <fieldset className="fieldset">
                 <label className="label">Email</label>

@@ -9,7 +9,7 @@ const AuthLayout = () => {
       <header>
         <Navbar></Navbar>
       </header>
-      <main className="max-w-1/2 mx-auto">
+      <main className="w-full lg:max-w-1/2 mx-auto">
       <Outlet></Outlet>
 
       </main>
