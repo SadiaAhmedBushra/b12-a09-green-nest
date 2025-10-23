@@ -9,22 +9,24 @@ import Register from "../pages/Register";
 import AuthLayout from "../layouts/AuthLayout";
 import PlantDetails from "../pages/PlantDetails";
 import PrivateRoute from "../provider/PrivateRoute";
+import LoadingPage from "../pages/LoadingPage";
+import MyProfile from "../pages/MyProfile";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayout></HomeLayout>,
     // errorElement: <ErrorPage />,
-    hydrateFallbackElement: <div>Loading...</div>,
+    hydrateFallbackElement: <LoadingPage></LoadingPage>,
     children: [
       {
         path: "",
         element: <Home></Home>,
       },
-    //   {
-    //     path: "/plant",
-    //     element: <TopRatedIndoorPlants />,
-    //   },
+      {
+        path: "/plants",
+        element: <TopRatedIndoorPlants />,
+      },
       {
         path: "/tip",
         element: <PlantCareTipsSection></PlantCareTipsSection>,
@@ -55,10 +57,13 @@ const router = createBrowserRouter([
       <PlantDetails></PlantDetails>
     </PrivateRoute>,
     loader: ()=> fetch("/plants.json"),
+    hydrateFallbackElement: <LoadingPage></LoadingPage>,
   },
   {
     path: "/profile",
-    element: <h2>My Profile</h2>,
+    element:       <PrivateRoute>
+        <MyProfile />
+      </PrivateRoute>,
   },
   {
     path: "/*",

@@ -1,4 +1,4 @@
-import React, { use, useState, useContext } from "react";
+import React, { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 import SocialLogIn from "../components/SocialLogIn";
@@ -7,7 +7,7 @@ const Register = () => {
   const [nameError, setNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("");
-  const { createUser, setUser, googleSignIn } = useContext(AuthContext);
+  const { createUser, setUser, googleSignIn, updateUser } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -33,6 +33,7 @@ const Register = () => {
     } else {
       setNameError("");
     }
+    const url = form.url.value;
     const email = form.email.value;
     const password = form.password.value;
 
@@ -52,7 +53,16 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        setUser(user);
+        updateUser({ displayName: name, photoURL: url })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: url });
+            navigate('./');
+          })
+          .catch((error) => {
+            // setUser(user);
+            setUser({ ...user, displayName: name, photoURL: url });
+          });
+
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
@@ -126,7 +136,7 @@ const Register = () => {
           </div>
         </div>
         <div className="text-center mt-5">
-<SocialLogIn handleGoogleSignIn={handleGoogleSignIn} />
+          <SocialLogIn handleGoogleSignIn={handleGoogleSignIn} />
         </div>
       </div>
     </div>

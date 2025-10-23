@@ -1,10 +1,11 @@
 import React, { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
+import SocialLogIn from "../components/SocialLogIn";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const { logIn } = use(AuthContext);
+  const { logIn, setUser, googleSignIn } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -19,13 +20,25 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         // console.log(user);
-        navigate(`${location.state? location.state : "/"}`)
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
         const errorCode = error.code;
         // const errorMessage = error.message;
         // alert(errorCode, errorMessage);
         setError(errorCode);
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        navigate(location.state ? location.state : "/");
+      })
+      .catch((error) => {
+        setError(error.code);
       });
   };
   return (
@@ -59,9 +72,7 @@ const Login = () => {
                     Forgot password?
                   </a>
                 </div>
-                {
-                  error && <p className="text-xs text-error">{error}</p>
-                }
+                {error && <p className="text-xs text-error">{error}</p>}
                 <button type="submit" className="btn btn-primary mt-4">
                   Login
                 </button>
@@ -74,6 +85,9 @@ const Login = () => {
               </fieldset>
             </form>
           </div>
+        </div>
+        <div className="text-center mt-5">
+          <SocialLogIn handleGoogleSignIn={handleGoogleSignIn} />
         </div>
       </div>
     </div>
