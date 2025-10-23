@@ -11,6 +11,7 @@ import PlantDetails from "../pages/PlantDetails";
 import PrivateRoute from "../provider/PrivateRoute";
 import LoadingPage from "../pages/LoadingPage";
 import MyProfile from "../pages/MyProfile";
+import ForgotPassword from "../pages/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -40,30 +41,38 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: <AuthLayout></AuthLayout>,
-    children:[
-        {
-           path: "/auth/login",
-    element: <Login></Login>, 
-        },
-        {
-           path: "/auth/register",
-    element: <Register></Register>, 
-        },
-    ]
+    children: [
+      {
+        path: "/auth/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/auth/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/auth/forgotpassword",
+        element: <ForgotPassword></ForgotPassword>,
+      },
+    ],
   },
   {
     path: "/plantdetails/:plantId",
-    element: <PrivateRoute> 
-      <PlantDetails></PlantDetails>
-    </PrivateRoute>,
-    loader: ()=> fetch("/plants.json"),
+    element: (
+      <PrivateRoute>
+        <PlantDetails></PlantDetails>
+      </PrivateRoute>
+    ),
+    loader: () => fetch("/plants.json"),
     hydrateFallbackElement: <LoadingPage></LoadingPage>,
   },
   {
     path: "/profile",
-    element:       <PrivateRoute>
+    element: (
+      <PrivateRoute>
         <MyProfile />
-      </PrivateRoute>,
+      </PrivateRoute>
+    ),
   },
   {
     path: "/*",

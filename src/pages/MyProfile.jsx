@@ -29,7 +29,7 @@ const MyProfile = () => {
         <Navbar></Navbar>
       </nav>
       <main>
-        <h1 className="text-3xl text-center text-base-300 font-bold my-10">
+        <h1 className="text-3xl text-center font-bold my-10">
           Your Profile
         </h1>
 

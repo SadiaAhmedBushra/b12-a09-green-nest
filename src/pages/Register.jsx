@@ -2,6 +2,7 @@ import React, { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 import SocialLogIn from "../components/SocialLogIn";
+import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 
 const Register = () => {
   const [nameError, setNameError] = useState("");
@@ -10,6 +11,8 @@ const Register = () => {
   const { createUser, setUser, googleSignIn, updateUser } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [hidePassword, setHidePassword] = useState(true);
 
   const handleGoogleSignIn = () => {
     googleSignIn()
@@ -56,7 +59,7 @@ const Register = () => {
         updateUser({ displayName: name, photoURL: url })
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: url });
-            navigate('./');
+            navigate("./");
           })
           .catch((error) => {
             // setUser(user);
@@ -86,7 +89,7 @@ const Register = () => {
                 <input
                   name="name"
                   type="text"
-                  className="input"
+                  className="input w-full"
                   placeholder="Name"
                   required
                 />
@@ -97,7 +100,7 @@ const Register = () => {
                 <input
                   name="url"
                   type="url"
-                  className="input"
+                  className="input w-full"
                   placeholder="Photo-URL"
                   required
                 />
@@ -106,18 +109,34 @@ const Register = () => {
                 <input
                   name="email"
                   type="email"
-                  className="input"
+                  className="input w-full"
                   placeholder="Email"
                   required
                 />
+
                 <label className="label">Password</label>
-                <input
-                  name="password"
-                  type="password"
-                  className="input"
-                  placeholder="Password"
-                  required
-                />
+                <div className="relative w-full">
+                  <input
+                    type={hidePassword ? "password" : "text"}
+                    placeholder="Enter your password"
+                    value={password}
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="input w-full pr-12"
+                    required
+                  />
+                  <span
+                    className="absolute right-3 top-3 cursor-pointer "
+                    onClick={() => setHidePassword(!hidePassword)}
+                  >
+                    {hidePassword ? (
+                      <BiSolidShow size={20} className="text-base-300" />
+                    ) : (
+                      <BiSolidHide size={20} className="text-base-300" />
+                    )}{" "}
+                    {/* ✅ icon */}
+                  </span>
+                </div>
                 {passwordError && (
                   <p className="text-xs text-error">{passwordError}</p>
                 )}

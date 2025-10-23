@@ -2,12 +2,15 @@ import React, { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 import SocialLogIn from "../components/SocialLogIn";
+import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 
 const Login = () => {
   const [error, setError] = useState("");
   const { logIn, setUser, googleSignIn } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [hidePassword, setHidePassword] = useState(true);
 
   const handleLogIn = (e) => {
     e.preventDefault();
@@ -54,23 +57,38 @@ const Login = () => {
                 <label className="label">Email</label>
                 <input
                   type="email"
-                  className="input"
+                  className="input  w-full"
                   placeholder="Email"
                   name="email"
                   required
                 />
+
                 <label className="label">Password</label>
-                <input
-                  name="password"
-                  type="password"
-                  className="input"
-                  placeholder="Password"
-                  required
-                />
+                <div className="relative w-full">
+                  <input
+                    type={hidePassword ? "password" : "text"} 
+                    placeholder="Enter your password"
+                    value={password}
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="input w-full pr-12"
+                    required
+                  />
+                  <span
+                    className="absolute right-3 top-3 cursor-pointer "
+                    onClick={() => setHidePassword(!hidePassword)}
+                  >
+                    {hidePassword  ? <BiSolidShow size={20} className="text-base-300"/> : <BiSolidHide size={20} className="text-base-300"/>} {/* ✅ icon */}
+                  </span>
+                </div>
+
                 <div>
-                  <a className="link link-hover text-base-300">
-                    Forgot password?
-                  </a>
+                  <Link
+                    to="/auth/forgotpassword"
+                    className="link link-hover text-base-300 text-sm hover:underline"
+                  >
+                    Forgot Password?
+                  </Link>
                 </div>
                 {error && <p className="text-xs text-error">{error}</p>}
                 <button type="submit" className="btn btn-primary mt-4">

@@ -1,14 +1,16 @@
 import React, { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
+import toast from "react-hot-toast";
 import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  signInWithPopup, 
+  signInWithPopup,
   GoogleAuthProvider,
-  updateProfile
+  updateProfile,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 export const AuthContext = createContext();
@@ -23,7 +25,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-      console.log(user, loading)
+  console.log(user, loading);
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -33,29 +35,44 @@ const AuthProvider = ({ children }) => {
   const logIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
-  }
+  };
 
   const logOut = () => {
     return signOut(auth);
-  }
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
-    return ()=>{
+    return () => {
       unsubscribe();
-    }
+    };
   }, []);
 
-  const updateUser = (updatedData) =>{
+  const updateUser = (updatedData) => {
     // return updateProfile(auth.currentUser, updatedData);
-        if (!auth.currentUser) return;
+    if (!auth.currentUser) return;
     return updateProfile(auth.currentUser, updatedData).then(() => {
-      setUser({ ...auth.currentUser, ...updatedData }); // ✅ ensures UI updates immediately
+      setUser({ ...auth.currentUser, ...updatedData });
     });
-  }
+  };
+
+  const forgotPassword = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setLoading(false);
+        // toast.success("Reset password email sent");
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error(error.message);
+        // toast.error("Error sending reset password email. Please try again.");
+      });
+  };
+
   const authData = {
     user,
     setUser,
@@ -66,11 +83,12 @@ const AuthProvider = ({ children }) => {
     setLoading,
     googleSignIn,
     updateUser,
+    forgotPassword
   };
 
-  
-  return <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>;
-;
+  return (
+    <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
