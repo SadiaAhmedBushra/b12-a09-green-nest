@@ -25,14 +25,14 @@ const greenExperts = [
 const MeetOurGreenExperts = () => {
   return (
     <section className="my-4">
-      <h1 className="text-3xl font-bold text-center my-4">
+      <h1 className="text-3xl font-bold text-center mb-6">
         Meet Our Green Experts
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {greenExperts.map((expert) => (
           <div
-            className="flex flex-col items-center bg-[#ECFFDC] px-2 py-5 rounded-lg"
+            className="transform transition-transform duration-300 hover:scale-105 flex flex-col items-center bg-[#ECFFDC] px-2 py-4 rounded-lg"
             key={expert.expertId}
           >
             <img

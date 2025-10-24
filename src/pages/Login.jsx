@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 import SocialLogIn from "../components/SocialLogIn";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -30,6 +31,7 @@ const Login = () => {
         // const errorMessage = error.message;
         // alert(errorCode, errorMessage);
         setError(errorCode);
+        toast.error("Wrong email or password. Log In unsuccessful!");
       });
   };
 
@@ -42,10 +44,14 @@ const Login = () => {
       })
       .catch((error) => {
         setError(error.code);
+                toast.error("Log In unsuccessful!");
+
       });
   };
   return (
     <div>
+      <Toaster position="top-right" />
+
       <div className="w-11/12 mx-auto my-10">
         <div className="flex flex-col justify-items-center mx-auto gap-4 ">
           <div className="text-center mb-5 ">
@@ -66,7 +72,7 @@ const Login = () => {
                 <label className="label">Password</label>
                 <div className="relative w-full">
                   <input
-                    type={hidePassword ? "password" : "text"} 
+                    type={hidePassword ? "password" : "text"}
                     placeholder="Enter your password"
                     value={password}
                     name="password"
@@ -78,7 +84,12 @@ const Login = () => {
                     className="absolute right-3 top-3 cursor-pointer "
                     onClick={() => setHidePassword(!hidePassword)}
                   >
-                    {hidePassword  ? <BiSolidShow size={20} className="text-base-300"/> : <BiSolidHide size={20} className="text-base-300"/>} {/* ✅ icon */}
+                    {hidePassword ? (
+                      <BiSolidShow size={20} className="text-base-300" />
+                    ) : (
+                      <BiSolidHide size={20} className="text-base-300" />
+                    )}{" "}
+                    {/* ✅ icon */}
                   </span>
                 </div>
 

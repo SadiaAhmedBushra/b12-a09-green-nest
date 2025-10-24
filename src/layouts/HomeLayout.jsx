@@ -21,26 +21,10 @@ const HomeLayout = () => {
       <nav>
         <Navbar></Navbar>
       </nav>
-      {/* <main className="mt-4">
-        <div className="grid grid-cols-12 gap-5 justify-items-center">
-          <div className="col-span-12 lg:col-span-9">
-            <TopRatedIndoorPlants plants={plants}></TopRatedIndoorPlants>
-            <MeetOurGreenExperts></MeetOurGreenExperts>
-          </div>
 
-          <div className="col-span-12 lg:col-span-3 flex justify-end">
-          </div>
-        </div>
-
-        {state === "loading" ? <LoadingPage /> : <Outlet />}
-
-        <section>
-          <PlantCareTipsSection />
-        </section>
-      </main> */}
-  <main className="mt-4">
-    <Outlet /> {/* Only render the current route's component */}
-  </main>
+      <main className="mt-4">
+        <Outlet /> {/* Only render the current route's component */}
+      </main>
       <footer>
         <Footer></Footer>
       </footer>

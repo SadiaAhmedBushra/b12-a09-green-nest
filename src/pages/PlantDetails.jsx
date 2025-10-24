@@ -39,12 +39,11 @@ const PlantDetails = () => {
 
   return (
     <div className="max-w-11/12 mx-auto">
-      <Toaster />
+      <Toaster position="top-right"/>
       <nav>
         <Navbar></Navbar>
       </nav>
       <main className="flex flex-col justify-between items-center my-10">
-        {/* Details */}
         <div className="flex flex-col lg:flex-row justify-center items-center gap-6 w-full ">
           <div className="w-[30%] flex lg:justify-end">
             <img src={plant.image} alt="" />

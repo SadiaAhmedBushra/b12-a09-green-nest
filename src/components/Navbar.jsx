@@ -1,6 +1,7 @@
 import React, { use, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { FaRegUser, FaUserAlt, FaUserCircle } from "react-icons/fa";
+import { PiPlant } from "react-icons/pi";
 import { AuthContext } from "../provider/AuthProvider";
 import { MdLogout, MdOutlineLogin } from "react-icons/md";
 import { FaRegCircleUser } from "react-icons/fa6";
@@ -21,8 +22,9 @@ const Navbar = () => {
   return (
     <div>
       <div className="flex justify-between items-center mt-5">
-        <div>
+        <div className="flex flex-row ">
           <h1 className="text-[#008000] text-xl font-bold">GreenNest</h1>
+          <PiPlant size={17} className="text-[#008000]" />
         </div>
 
         <div className="nav flex lg:flex-row flex-col justify-between items-center gap-1 lg:gap-3">

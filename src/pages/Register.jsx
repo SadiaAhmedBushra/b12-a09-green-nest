@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 import SocialLogIn from "../components/SocialLogIn";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const [nameError, setNameError] = useState("");
@@ -24,6 +25,7 @@ const Register = () => {
       .catch((error) => {
         setError(error.code);
       });
+    toast.error("Sign Up unsuccessful!");
   };
 
   const handleRegister = (e) => {
@@ -73,10 +75,13 @@ const Register = () => {
         // const errorMessage = error.message;
         // alert(errorMessage);
         setError(errorCode);
+        toast.error("Sign Up unsuccessful!");
       });
   };
   return (
     <div>
+      <Toaster position="top-right" />
+
       <div className="w-11/12 mx-auto my-10">
         <div className="flex flex-col justify-items-center mx-auto gap-4">
           <div className="text-center mb-5">

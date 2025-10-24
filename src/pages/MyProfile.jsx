@@ -2,7 +2,12 @@ import React, { use, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { updateProfile } from "firebase/auth";
+import { getAuth, updateProfile } from "firebase/auth";
+import toast, { Toaster } from "react-hot-toast";
+import app from "../firebase/firebase.config";
+
+const auth = getAuth(app);
+
 
 const MyProfile = () => {
   const { user, setUser } = use(AuthContext);
@@ -13,7 +18,7 @@ const MyProfile = () => {
   const handleUpdateProfile = () => {
     if (!user) return;
 
-    updateProfile(user, { displayName, photoURL })
+    updateProfile(auth.currentUser, { displayName, photoURL })
       .then(() => {
         setUser({ ...user, displayName, photoURL });
         setSuccess("✅ Your profile has been successfully updated!");
