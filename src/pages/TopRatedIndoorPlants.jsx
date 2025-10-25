@@ -4,7 +4,7 @@ import PlantCard from "../components/PlantCard";
 
 const TopRatedIndoorPlants = () => {
   const { plants, loading, error } = usePlants();
-  console.log(plants);
+  // console.log(plants);
 
   return (
     <div>

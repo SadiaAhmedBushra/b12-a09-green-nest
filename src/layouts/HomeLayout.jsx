@@ -20,6 +20,7 @@ const HomeLayout = () => {
     <div className="max-w-11/12 mx-auto">
       <nav>
         <Navbar></Navbar>
+        {import.meta.env.VITE_name}
       </nav>
 
       <main className="mt-4">

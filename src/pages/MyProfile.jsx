@@ -6,6 +6,7 @@ import { getAuth, updateProfile } from "firebase/auth";
 import toast, { Toaster } from "react-hot-toast";
 import app from "../firebase/firebase.config";
 
+
 const auth = getAuth(app);
 
 
@@ -13,7 +14,6 @@ const MyProfile = () => {
   const { user, setUser } = use(AuthContext);
   const [displayName, setDisplayName] = useState(user.displayName);
   const [photoURL, setURL] = useState(user.photoURL);
-  const [success, setSuccess] = useState("");
 
   const handleUpdateProfile = () => {
     if (!user) return;
@@ -21,11 +21,11 @@ const MyProfile = () => {
     updateProfile(auth.currentUser, { displayName, photoURL })
       .then(() => {
         setUser({ ...user, displayName, photoURL });
-        setSuccess("✅ Your profile has been successfully updated!");
+        toast.success("Your profile has been successfully updated!");
       })
       .catch((error) => {
         console.error(error);
-        setSuccess("Error ❌ your profile could not be updated.");
+        toast.error("Your profile could not be updated.");
       });
   };
   return (
@@ -34,6 +34,8 @@ const MyProfile = () => {
         <Navbar></Navbar>
       </nav>
       <main>
+              <Toaster position="top-right"/>
+        
         <h1 className="text-3xl text-center font-bold my-10">
           Your Profile
         </h1>
@@ -76,8 +78,6 @@ const MyProfile = () => {
           >
             Save Updates
           </button>
-
-          {success && <p className="text-center my-4 text-base-300 bg-white p-2 rounded-full">{success}</p>}
         </div>
       </main>
 
